@@ -1,4 +1,4 @@
-# Pulse: 3D Gestural Particle System
+# Plasma: 3D Gestural Particle System
 
 A high-performance, interactive 3D particle simulation that morphs between beautiful mathematical templates and reacts in real-time to webcam hand gestures. Powered by **Three.js** (WebGL) and **MediaPipe Hands** (Machine Learning).
 
