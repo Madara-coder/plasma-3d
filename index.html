@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PLASMA: Interactive 3D Particle System</title>
-  <meta name="description" content="A real-time interactive 3D particle system reacting to hand gestures from your webcam, powered by Three.js and MediaPipe Hands.">
-  
+  <title>: Interactive 3D Particle System</title>
+  <meta name="description"
+    content="A real-time interactive 3D particle system reacting to hand gestures from your webcam, powered by Three.js and MediaPipe Hands.">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- External CDN Libraries (Three.js & OrbitControls) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" crossorigin="anonymous"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"
+    crossorigin="anonymous"></script>
+
   <!-- MediaPipe Hands CDN Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
@@ -42,7 +47,8 @@
       user-select: none;
     }
 
-    body, html {
+    body,
+    html {
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -93,7 +99,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .loader-title {
@@ -137,6 +145,7 @@
     .control-panel::-webkit-scrollbar {
       width: 4px;
     }
+
     .control-panel::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 2px;
@@ -272,7 +281,7 @@
     .color-picker-wrapper input[type="color"]::-webkit-color-swatch {
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     #colorHex {
@@ -450,7 +459,7 @@
       background: #000;
     }
 
-    .camera-preview-window video, 
+    .camera-preview-window video,
     .camera-preview-window canvas {
       position: absolute;
       top: 0;
@@ -462,12 +471,14 @@
 
     .camera-preview-window canvas {
       z-index: 2;
-      transform: scaleX(-1); /* Mirror canvas to match mirror webcam */
+      transform: scaleX(-1);
+      /* Mirror canvas to match mirror webcam */
     }
 
     .camera-preview-window video {
       z-index: 1;
-      transform: scaleX(-1); /* Mirror video preview */
+      transform: scaleX(-1);
+      /* Mirror video preview */
     }
 
     /* Onboarding Tutorial Overlay */
@@ -519,8 +530,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Info Toggle Button */
@@ -539,7 +557,7 @@
       justify-content: center;
       cursor: pointer;
       z-index: 10;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       color: var(--text-primary);
       transition: all 0.25s ease;
     }
@@ -604,9 +622,11 @@
         top: 16px;
         max-height: 55vh;
       }
+
       #onboarding {
         display: none;
       }
+
       .camera-preview-container {
         width: 140px;
         height: 105px;
@@ -616,12 +636,13 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Loading screen overlay -->
   <div id="loader">
     <div class="loader-spinner"></div>
-    <div class="loader-title">PLASMA</div>
+    <div class="loader-title"></div>
     <div class="loader-subtitle">Preparing 3D Particle Universe...</div>
   </div>
 
@@ -631,7 +652,9 @@
   <!-- Onboarding / Tutorial Overlay -->
   <div id="onboarding">
     <div class="onboarding-title">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2.5">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
       Interactive Gestures
     </div>
     <div class="onboarding-step">
@@ -655,11 +678,13 @@
   <!-- Info Button and Description panel -->
   <div class="info-btn" onclick="toggleInfoPanel()">i</div>
   <div class="info-panel" id="info-panel">
-    <h3>About Plasma</h3>
+    <h3>About Pulse</h3>
     <p>A real-time interactive 3D simulation combining high-performance computer vision and WebGL rendering.</p>
     <ul>
-      <li><strong>Hand tracking:</strong> Captures joint coordinates via WebRTC camera streams and MediaPipe Hands ML.</li>
-      <li><strong>Tension Mapping:</strong> Joint distance vectors are normalized against palm width to extract a gesture ratio.</li>
+      <li><strong>Hand tracking:</strong> Captures joint coordinates via WebRTC camera streams and MediaPipe Hands ML.
+      </li>
+      <li><strong>Tension Mapping:</strong> Joint distance vectors are normalized against palm width to extract a
+        gesture ratio.</li>
       <li><strong>Morphing:</strong> Points interpolate between mathematical target formulas with organic noise.</li>
     </ul>
   </div>
@@ -667,10 +692,11 @@
   <!-- Glassmorphic Controls Panel -->
   <div class="control-panel">
     <h1>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 5px var(--accent-glow));">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 5px var(--accent-glow));">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
-      PLASMA
+      PULSE
     </h1>
     <div class="subtitle">3D Gestural Particle System</div>
 
@@ -679,7 +705,8 @@
     <div class="section-title">Visual Shape Templates</div>
     <div class="grid-buttons">
       <button id="btn-saturn" class="btn active" onclick="switchTemplate('saturn')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="6" />
           <path d="M2 12c4-2 16-2 20 0" />
           <path d="M5 15c2.5 1.5 11.5 1.5 14 0" />
@@ -687,21 +714,27 @@
         Saturn Ring System
       </button>
       <button id="btn-heart" class="btn" onclick="switchTemplate('heart')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
         Pulsing Heart
       </button>
       <button id="btn-flower" class="btn" onclick="switchTemplate('flower')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3" />
-          <path d="M12 2a3 3 0 0 0-3 3v1a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM12 15a3 3 0 0 0-3 3v1a3 3 0 0 0 6 0v-1a3 3 0 0 0-3-3zM2 12a3 3 0 0 0 3 3h1a3 3 0 0 0 0-6H5a3 3 0 0 0-3 3zM15 12a3 3 0 0 0 3 3h1a3 3 0 0 0 0-6h-1a3 3 0 0 0-3 3z" />
-          <path d="M5.5 5.5a3 3 0 0 0 4.24 4.24M14.26 14.26a3 3 0 0 0 4.24 4.24M5.5 18.5a3 3 0 0 0 4.24-4.24M14.26 9.74a3 3 0 0 0 4.24-4.24" />
+          <path
+            d="M12 2a3 3 0 0 0-3 3v1a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM12 15a3 3 0 0 0-3 3v1a3 3 0 0 0 6 0v-1a3 3 0 0 0-3-3zM2 12a3 3 0 0 0 3 3h1a3 3 0 0 0 0-6H5a3 3 0 0 0-3 3zM15 12a3 3 0 0 0 3 3h1a3 3 0 0 0 0-6h-1a3 3 0 0 0-3 3z" />
+          <path
+            d="M5.5 5.5a3 3 0 0 0 4.24 4.24M14.26 14.26a3 3 0 0 0 4.24 4.24M5.5 18.5a3 3 0 0 0 4.24-4.24M14.26 9.74a3 3 0 0 0 4.24-4.24" />
         </svg>
         Golden Flower Blossom
       </button>
       <button id="btn-buddha" class="btn" onclick="switchTemplate('buddha')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="5" r="2" />
           <path d="M12 1a6 6 0 0 1 6 6M6 7a6 6 0 0 1 6-6" stroke-dasharray="2 2" />
           <path d="M6 14c0-2.5 2-4 6-4s6 1.5 6 4" />
@@ -713,20 +746,25 @@
         Buddha Silhouette
       </button>
       <button id="btn-fireworks" class="btn" onclick="switchTemplate('fireworks')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="2" />
           <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1" />
         </svg>
         Radial Fireworks Burst
       </button>
       <button id="btn-text" class="btn" onclick="switchTemplate('text')">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 7V4h16v3M9 20h6M12 7v13" />
         </svg>
         Custom Text Shape
       </button>
       <div id="text-input-row" class="control-row" style="display: none; margin-top: 4px;">
-        <input type="text" id="customTextVal" value="JOHN DOE" placeholder="Type custom text..." style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 10px 14px; color: #fff; font-family: inherit; font-size: 0.88rem; width: 100%; outline: none; transition: border-color 0.25s ease;" onfocus="this.style.borderColor='var(--accent-color)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'">
+        <input type="text" id="customTextVal" value="JOHN DOE" placeholder="Type custom text..."
+          style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 10px 14px; color: #fff; font-family: inherit; font-size: 0.88rem; width: 100%; outline: none; transition: border-color 0.25s ease;"
+          onfocus="this.style.borderColor='var(--accent-color)'"
+          onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'">
       </div>
     </div>
 
@@ -771,13 +809,14 @@
     <div class="divider"></div>
 
     <button id="toggleCamBtn" class="btn-primary" onclick="toggleWebcam()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
-        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-        <circle cx="12" cy="13" r="4"/>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+        <circle cx="12" cy="13" r="4" />
       </svg>
       Enable Webcam Tracking
     </button>
-    
+
     <button id="resetViewBtn" class="btn-secondary" onclick="resetCamera()">
       Reset Orbit Camera
     </button>
@@ -800,35 +839,35 @@
     const N = 4000; // Particle density
     let scene, camera, renderer, orbitControls;
     let particleSystem, pointsGeometry, pointsMaterial;
-    
+
     // Position & color buffers
     const targetPositions = new Float32Array(N * 3);
     const targetColors = new Float32Array(N * 3);
     const particleMeta = []; // Holds phase, noiseOffsets for organic movement
-    
+
     // Custom Text sampling variables
     let textSampledPoints = [];
     let customTextString = "JOHN DOE";
-    
+
     // Control variables
     let activeTemplate = 'saturn';
     let morphSpeed = 0.06;
     let baseParticleSize = 0.22;
     let globalTint = new THREE.Color(0xffffff);
-    
+
     // Hand tracking / webcam states
     let webcamActive = false;
     let cameraHelper = null;
     let hands = null;
     let handsDetected = false;
     let lastHandsDetectedTime = 0;
-    
+
     // Interpolated hand gesture variables
     let targetScale = 1.0;
     let targetExpansion = 1.0;
     let currentScale = 1.0;
     let currentExpansion = 1.0;
-    
+
     // Time variable
     let clock = new THREE.Clock();
 
@@ -838,16 +877,16 @@
       canvas.width = 64;
       canvas.height = 64;
       const ctx = canvas.getContext('2d');
-      
+
       const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
       gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
       gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.85)');
       gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.25)');
       gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      
+
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, 64, 64);
-      
+
       const texture = new THREE.CanvasTexture(canvas);
       return texture;
     }
@@ -861,16 +900,16 @@
         const hue2rgb = (p, q, t) => {
           if (t < 0) t += 1;
           if (t > 1) t -= 1;
-          if (t < 1/6) return p + (q - p) * 6 * t;
-          if (t < 1/2) return q;
-          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
           return p;
         };
         const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
         const p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1/3);
+        r = hue2rgb(p, q, h + 1 / 3);
         g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1/3);
+        b = hue2rgb(p, q, h - 1 / 3);
       }
       return [r, g, b];
     }
@@ -886,11 +925,11 @@
         const theta = u * 2.0 * Math.PI;
         const phi = Math.acos(2.0 * v - 1.0);
         const r = 3.6;
-        
+
         target.x = r * Math.sin(phi) * Math.cos(theta);
         target.y = r * Math.sin(phi) * Math.sin(theta);
         target.z = r * Math.cos(phi);
-        
+
         // Warm Orange/Golden Gradient Core
         color.r = 1.0;
         color.g = 0.5 + Math.random() * 0.25;
@@ -900,20 +939,20 @@
         const ratio = (i - N * 0.45) / (N * 0.55);
         const theta = Math.random() * Math.PI * 2;
         const r = 5.2 + ratio * 4.6; // Inner radius 5.2 to outer 9.8
-        
+
         let lx = r * Math.cos(theta);
         let lz = r * Math.sin(theta);
         let ly = (Math.random() - 0.5) * 0.2; // very flat
-        
+
         // Tilt ring 26 degrees around X axis
         const tilt = 26 * Math.PI / 180;
         const cosT = Math.cos(tilt);
         const sinT = Math.sin(tilt);
-        
+
         target.x = lx;
         target.y = ly * cosT - lz * sinT;
         target.z = ly * sinT + lz * cosT;
-        
+
         // Ice Blue / Cyan ring particles
         color.r = 0.25 + (1.0 - ratio) * 0.4;
         color.g = 0.72 + ratio * 0.25;
@@ -926,16 +965,16 @@
       const t = Math.PI * (2 * Math.random() - 1);
       const zVal = (Math.random() - 0.5) * 6; // Thickness range
       const factor = Math.sqrt(1 - (zVal / 6) ** 2); // Pillowed edges
-      
+
       const hx = factor * 16 * Math.pow(Math.sin(t), 3);
-      const hy = factor * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+      const hy = factor * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
       const hz = zVal;
-      
+
       // Center and scale to fit our frame
       target.x = hx * 0.45;
       target.y = hy * 0.45 + 0.8;
       target.z = hz * 0.45;
-      
+
       // Radiant Crimson & Magenta colors
       const gradientVal = (target.y + 3) / 8.5; // normalized height index
       color.r = 1.0;
@@ -946,7 +985,7 @@
     // 3. Flower Shape (Fibonacci phyllotaxis bloom)
     function generateFlower(i, target, color) {
       const theta = i * 2.399963; // Golden angle
-      
+
       if (i < N * 0.12) {
         // Pistil (Yellow/Gold Center)
         const ratio = i / (N * 0.12);
@@ -954,7 +993,7 @@
         target.x = r * Math.cos(theta);
         target.z = r * Math.sin(theta);
         target.y = (Math.random() - 0.5) * 0.3;
-        
+
         color.r = 1.0;
         color.g = 0.8 - ratio * 0.2;
         color.b = 0.0;
@@ -963,11 +1002,11 @@
         const ratio = (i - N * 0.12) / (N * 0.88);
         const r = Math.sqrt(ratio) * 7.5 + 1.5;
         const wave = Math.cos(8 * theta) * 0.8; // Wavy petals modulation
-        
+
         target.x = r * Math.cos(theta);
         target.z = r * Math.sin(theta);
         target.y = Math.sin(r * 1.25) * 1.6 - (r - 1.5) * 0.25 + wave;
-        
+
         // Pink-purple gradient
         color.r = 0.65 + ratio * 0.35;
         color.g = 0.1;
@@ -984,7 +1023,7 @@
         target.x = r * Math.cos(theta);
         target.y = r * Math.sin(theta) + 1.2; // center behind head
         target.z = -1.8 + (Math.random() - 0.5) * 0.25;
-        
+
         // Mystical Aura Blue/Glow
         color.r = 0.15 + (r / 6.5) * 0.2;
         color.g = 0.68 + (1.0 - r / 6.5) * 0.25;
@@ -998,7 +1037,7 @@
           const theta = u * 2.0 * Math.PI;
           const phi = Math.acos(2.0 * v - 1.0);
           const r = 1.1 + (Math.random() - 0.5) * 0.12;
-          
+
           target.x = r * Math.sin(phi) * Math.cos(theta);
           target.y = r * Math.sin(phi) * Math.sin(theta) + 3.2;
           target.z = r * Math.cos(phi);
@@ -1009,7 +1048,7 @@
           const theta = u * 2.0 * Math.PI;
           const phi = Math.acos(2.0 * v - 1.0);
           const r = 0.45;
-          
+
           target.x = r * Math.sin(phi) * Math.cos(theta);
           target.y = r * Math.sin(phi) * Math.sin(theta) + 4.4;
           target.z = r * Math.cos(phi);
@@ -1026,7 +1065,7 @@
         target.x = (Math.random() - 0.5) * w;
         const depth = (1.0 - h * 0.35) * 1.5;
         target.z = (Math.random() - 0.5) * depth;
-        
+
         // Rich Gold Torso
         color.r = 0.9;
         color.g = 0.65;
@@ -1037,11 +1076,11 @@
         const rX = 3.65;
         const rZ = 2.45;
         const ratio = Math.random();
-        
+
         target.x = Math.cos(theta) * rX * ratio;
         target.z = Math.sin(theta) * rZ * ratio;
         target.y = -0.4 + (Math.random() - 0.5) * 0.5 - (1.0 - ratio) * 0.4;
-        
+
         // Deep Gold/Bronze Legs
         color.r = 0.82;
         color.g = 0.52;
@@ -1055,22 +1094,22 @@
         // 18 Radial Spark Beams
         const numRays = 18;
         const rayIdx = i % numRays;
-        
+
         // Distribute rays spherically
         const phi = Math.acos(1 - 2 * (rayIdx + 0.5) / numRays);
         const theta = rayIdx * Math.PI * (3 - Math.sqrt(5)); // Golden spiral distribution
-        
+
         const dx = Math.sin(phi) * Math.cos(theta);
         const dy = Math.sin(phi) * Math.sin(theta);
         const dz = Math.cos(phi);
-        
+
         const step = Math.floor(i / numRays) / (N * 0.48 / numRays);
         const r = step * 8.6 + (Math.random() - 0.5) * 0.3;
-        
+
         target.x = dx * r;
         target.y = dy * r;
         target.z = dz * r;
-        
+
         // High saturation HSL colors per ray
         const rgb = hslToRgb(rayIdx / numRays, 1.0, 0.55);
         color.r = rgb[0];
@@ -1081,7 +1120,7 @@
         const ratio = (i - N * 0.48) / (N * 0.34);
         let shellRadius = 3.5;
         let hue = 0.08; // default orange/gold
-        
+
         if (ratio > 0.66) {
           shellRadius = 8.5;
           hue = 0.85; // magenta/pink
@@ -1089,17 +1128,17 @@
           shellRadius = 6.0;
           hue = 0.52; // cyan
         }
-        
+
         const u = Math.random();
         const v = Math.random();
         const t = u * Math.PI * 2;
         const p = Math.acos(2.0 * v - 1.0);
         const r = shellRadius + (Math.random() - 0.5) * 0.4;
-        
+
         target.x = r * Math.sin(p) * Math.cos(t);
         target.y = r * Math.sin(p) * Math.sin(t);
         target.z = r * Math.cos(p);
-        
+
         const rgb = hslToRgb(hue + (Math.random() - 0.5) * 0.06, 1.0, 0.5);
         color.r = rgb[0];
         color.g = rgb[1];
@@ -1111,11 +1150,11 @@
         const t = u * Math.PI * 2;
         const p = Math.acos(2.0 * v - 1.0);
         const r = Math.pow(Math.random(), 1.6) * 2.2; // dense center density
-        
+
         target.x = r * Math.sin(p) * Math.cos(t);
         target.y = r * Math.sin(p) * Math.sin(t);
         target.z = r * Math.cos(p);
-        
+
         // Bright golden center
         color.r = 1.0;
         color.g = 0.82 + Math.random() * 0.18;
@@ -1126,38 +1165,38 @@
     // 6. Custom Text Shape (Sampled pixels from canvas font outline)
     function updateTextSampledPoints(text) {
       textSampledPoints = [];
-      
+
       const canvas = document.createElement('canvas');
       const width = 512;
       const height = 128;
       canvas.width = width;
       canvas.height = height;
       const ctx = canvas.getContext('2d');
-      
+
       // Clear with black
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, width, height);
-      
+
       // Text styling
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      
+
       // Adjust font size dynamically to keep it within canvas bounds
       let fontSize = 72;
       if (text.length > 8) {
         fontSize = Math.max(20, Math.floor(72 * (8 / text.length)));
       }
       ctx.font = `bold ${fontSize}px sans-serif`;
-      
+
       ctx.fillText(text, width / 2, height / 2);
-      
+
       const imgData = ctx.getImageData(0, 0, width, height);
       const data = imgData.data;
-      
+
       const tempPoints = [];
       const step = 2; // pixel sampling density
-      
+
       for (let y = 0; y < height; y += step) {
         for (let x = 0; x < width; x += step) {
           const idx = (y * width + x) * 4;
@@ -1166,7 +1205,7 @@
             // Map to Three.js world space coordinates
             const px = ((x / width) - 0.5) * 17;
             const py = ((0.5 - (y / height)) * 4.5) + 1.2;
-            
+
             tempPoints.push({
               x: px,
               y: py,
@@ -1175,11 +1214,11 @@
           }
         }
       }
-      
+
       if (tempPoints.length === 0) {
         tempPoints.push({ x: 0, y: 1.2, z: 0 });
       }
-      
+
       textSampledPoints = tempPoints;
     }
 
@@ -1191,18 +1230,18 @@
         color.r = 1; color.g = 1; color.b = 1;
         return;
       }
-      
+
       const pt = textSampledPoints[i % textSampledPoints.length];
-      
+
       // Add slight jitter for cloud effect
       const jitterX = (Math.random() - 0.5) * 0.08;
       const jitterY = (Math.random() - 0.5) * 0.08;
       const jitterZ = (Math.random() - 0.5) * 0.08;
-      
+
       target.x = pt.x + jitterX;
       target.y = pt.y + jitterY;
       target.z = pt.z + jitterZ;
-      
+
       // Beautiful gradient across the text from cyan to pink
       const ratio = (pt.x + 8.5) / 17;
       color.r = 0.25 + ratio * 0.75;
@@ -1214,10 +1253,10 @@
     function updateTargets() {
       const targetVec = new THREE.Vector3();
       const targetCol = new THREE.Color();
-      
+
       for (let i = 0; i < N; i++) {
         const i3 = i * 3;
-        
+
         if (activeTemplate === 'saturn') {
           generateSaturn(i, targetVec, targetCol);
         } else if (activeTemplate === 'heart') {
@@ -1231,11 +1270,11 @@
         } else if (activeTemplate === 'text') {
           generateText(i, targetVec, targetCol);
         }
-        
+
         targetPositions[i3] = targetVec.x;
         targetPositions[i3 + 1] = targetVec.y;
         targetPositions[i3 + 2] = targetVec.z;
-        
+
         targetColors[i3] = targetCol.r;
         targetColors[i3 + 1] = targetCol.g;
         targetColors[i3 + 2] = targetCol.b;
@@ -1245,44 +1284,44 @@
     // --- WebGL / Three.js Setup ---
     function initThree() {
       const container = document.getElementById('canvas-container');
-      
+
       // Scene
       scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x040406, 0.015);
-      
+
       // Camera
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
       camera.position.set(0, 2, 14);
-      
+
       // Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(scene.fog.color);
       container.appendChild(renderer.domElement);
-      
+
       // Controls
       orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
       orbitControls.enableDamping = true;
       orbitControls.dampingFactor = 0.05;
       orbitControls.maxDistance = 30;
       orbitControls.minDistance = 3;
-      
+
       // Particle System Initialization
       pointsGeometry = new THREE.BufferGeometry();
-      
+
       const currentPos = new Float32Array(N * 3);
       const currentCol = new Float32Array(N * 3);
-      
+
       // Populate metadata and trigger first template configuration
       updateTargets();
-      
+
       // Initialize particles at target position with small random displacement
       for (let i = 0; i < N * 3; i++) {
         currentPos[i] = targetPositions[i] + (Math.random() - 0.5) * 5;
         currentCol[i] = targetColors[i];
       }
-      
+
       for (let i = 0; i < N; i++) {
         particleMeta.push({
           noiseOffset: Math.random() * 200,
@@ -1290,13 +1329,13 @@
           speed: 0.03 + Math.random() * 0.05
         });
       }
-      
+
       pointsGeometry.setAttribute('position', new THREE.BufferAttribute(currentPos, 3));
       pointsGeometry.setAttribute('color', new THREE.BufferAttribute(currentCol, 3));
-      
+
       // Texture
       const circleTex = createCircleTexture();
-      
+
       pointsMaterial = new THREE.PointsMaterial({
         size: baseParticleSize,
         map: circleTex,
@@ -1306,17 +1345,17 @@
         vertexColors: true,
         color: globalTint
       });
-      
+
       particleSystem = new THREE.Points(pointsGeometry, pointsMaterial);
       scene.add(particleSystem);
-      
+
       // Ambient lighting (subtle)
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
       scene.add(ambientLight);
-      
+
       // Resize listener
       window.addEventListener('resize', onWindowResize, false);
-      
+
       // Fade out loading screen
       setTimeout(() => {
         const loader = document.getElementById('loader');
@@ -1339,20 +1378,20 @@
     // --- Switch UI template panel ---
     function switchTemplate(templateName) {
       activeTemplate = templateName;
-      
+
       // Toggle active states on UI buttons
       const buttons = document.querySelectorAll('.grid-buttons button');
       buttons.forEach(btn => btn.classList.remove('active'));
-      
+
       const activeBtn = document.getElementById(`btn-${templateName}`);
       if (activeBtn) activeBtn.classList.add('active');
-      
+
       // Toggle Custom Text input row
       const textRow = document.getElementById('text-input-row');
       if (textRow) {
         textRow.style.display = templateName === 'text' ? 'block' : 'none';
       }
-      
+
       // Regenerate math targets
       updateTargets();
     }
@@ -1370,33 +1409,33 @@
       const dxPalm = landmarks[5].x - landmarks[17].x;
       const dyPalm = landmarks[5].y - landmarks[17].y;
       const dzPalm = landmarks[5].z - landmarks[17].z;
-      const palmSize = Math.sqrt(dxPalm*dxPalm + dyPalm*dyPalm + dzPalm*dzPalm) || 0.05;
-      
+      const palmSize = Math.sqrt(dxPalm * dxPalm + dyPalm * dyPalm + dzPalm * dzPalm) || 0.05;
+
       // Palm Center Proxy: Average of wrist (0) and middle MCP knuckle (9)
       const palmCenterX = (landmarks[0].x + landmarks[9].x) / 2;
       const palmCenterY = (landmarks[0].y + landmarks[9].y) / 2;
       const palmCenterZ = (landmarks[0].z + landmarks[9].z) / 2;
-      
+
       // Normalized distance of each fingertip to palm center
       const tipIndices = [4, 8, 12, 16, 20];
       let sumDistance = 0;
-      
+
       for (const tip of tipIndices) {
         const dx = landmarks[tip].x - palmCenterX;
         const dy = landmarks[tip].y - palmCenterY;
         const dz = landmarks[tip].z - palmCenterZ;
-        const distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+        const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
         sumDistance += distance / palmSize;
       }
-      
+
       const averageNormalizedDistance = sumDistance / 5;
-      
+
       // Calibrate tension metric bounds:
       // Fist (closed hand) avgNormalizedDistance ~ 1.05
       // Open hand (stretched fingers) avgNormalizedDistance ~ 2.45
       const minDist = 1.1;
       const maxDist = 2.4;
-      
+
       let tension = (averageNormalizedDistance - minDist) / (maxDist - minDist);
       return Math.max(0.0, Math.min(1.0, tension)); // Clamp [0, 1]
     }
@@ -1406,40 +1445,40 @@
       const ctx = canvas.getContext('2d');
       const width = canvas.width;
       const height = canvas.height;
-      
+
       // Clear overlay
       ctx.clearRect(0, 0, width, height);
-      
+
       // Render mirrored webcam stream to preview canvas
       if (results.image) {
         ctx.drawImage(results.image, 0, 0, width, height);
       }
-      
+
       const statusHands = document.getElementById('status-hands');
       const tensionL = document.getElementById('status-tension-l');
       const tensionR = document.getElementById('status-tension-r');
-      
+
       if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         handsDetected = true;
         lastHandsDetectedTime = Date.now();
-        
+
         statusHands.textContent = results.multiHandLandmarks.length === 1 ? "1 Hand" : "2 Hands";
         statusHands.className = "status-val on";
-        
+
         let lTension = 0;
         let rTension = 0;
         let hasL = false;
         let hasR = false;
-        
+
         for (let h = 0; h < results.multiHandLandmarks.length; h++) {
           const landmarks = results.multiHandLandmarks[h];
           const isLeft = results.multiHandedness[h].label === 'Left'; // User perspective
-          
+
           // Render hand diagnostics lines
           drawSkeletonOverlay(ctx, landmarks, width, height);
-          
+
           const tension = calculateTension(landmarks);
-          
+
           if (isLeft) {
             lTension = tension;
             hasL = true;
@@ -1448,7 +1487,7 @@
             hasR = true;
           }
         }
-        
+
         // Update stats UI
         if (hasL) {
           tensionL.textContent = Math.round(lTension * 100) + "%";
@@ -1457,7 +1496,7 @@
           tensionL.textContent = "0%";
           tensionL.style.color = "var(--text-muted)";
         }
-        
+
         if (hasR) {
           tensionR.textContent = Math.round(rTension * 100) + "%";
           tensionR.style.color = `rgb(${255 * (1 - rTension)}, ${120 + 135 * rTension}, 255)`;
@@ -1465,7 +1504,7 @@
           tensionR.textContent = "0%";
           tensionR.style.color = "var(--text-muted)";
         }
-        
+
         // Map tension levels to scaling and expansion variables
         if (results.multiHandLandmarks.length === 2) {
           // Double control: Hand 1 controls size scale, Hand 2 controls radial expansion
@@ -1485,18 +1524,18 @@
     function drawSkeletonOverlay(ctx, landmarks, w, h) {
       // Connective joints maps
       const lines = [
-        [0,1], [1,2], [2,3], [3,4], // thumb
-        [0,5], [5,6], [6,7], [7,8], // index
-        [5,9], [9,10], [10,11], [11,12], // middle
-        [9,13], [13,14], [14,15], [15,16], // ring
-        [13,17], [17,18], [18,19], [19,20], [0,17] // pinky + palm
+        [0, 1], [1, 2], [2, 3], [3, 4], // thumb
+        [0, 5], [5, 6], [6, 7], [7, 8], // index
+        [5, 9], [9, 10], [10, 11], [11, 12], // middle
+        [9, 13], [13, 14], [14, 15], [15, 16], // ring
+        [13, 17], [17, 18], [18, 19], [19, 20], [0, 17] // pinky + palm
       ];
-      
+
       // Draw skeleton lines
       ctx.strokeStyle = 'rgba(0, 243, 255, 0.8)';
       ctx.lineWidth = 2.5;
       ctx.lineCap = 'round';
-      
+
       for (const line of lines) {
         const pt1 = landmarks[line[0]];
         const pt2 = landmarks[line[1]];
@@ -1505,13 +1544,13 @@
         ctx.lineTo(pt2.x * w, pt2.y * h);
         ctx.stroke();
       }
-      
+
       // Draw node points
       for (let idx = 0; idx < landmarks.length; idx++) {
         const pt = landmarks[idx];
         ctx.beginPath();
         ctx.arc(pt.x * w, pt.y * h, 3.5, 0, Math.PI * 2);
-        
+
         if ([4, 8, 12, 16, 20].includes(idx)) {
           ctx.fillStyle = '#ff00c8'; // Fingertip nodes
         } else if (idx === 0) {
@@ -1527,7 +1566,7 @@
       const statusHands = document.getElementById('status-hands');
       const tensionL = document.getElementById('status-tension-l');
       const tensionR = document.getElementById('status-tension-r');
-      
+
       // Fallback transition timer (1.2 seconds latency tolerance)
       if (Date.now() - lastHandsDetectedTime > 1200) {
         handsDetected = false;
@@ -1546,7 +1585,7 @@
       const statusCam = document.getElementById('status-camera');
       const previewContainer = document.getElementById('camera-preview-container');
       const video = document.getElementById('webcam');
-      
+
       if (webcamActive) {
         // Stop Camera
         webcamActive = false;
@@ -1558,13 +1597,13 @@
           video.srcObject.getTracks().forEach(track => track.stop());
           video.srcObject = null;
         }
-        
+
         previewContainer.classList.remove('active');
         statusCam.textContent = "Inactive";
         statusCam.className = "status-val off";
         toggleBtn.textContent = "Enable Webcam Tracking";
         toggleBtn.classList.remove('active');
-        
+
         handsDetected = false;
         const statusHands = document.getElementById('status-hands');
         statusHands.textContent = "Disabled";
@@ -1573,21 +1612,21 @@
         // Start Camera
         statusCam.textContent = "Requesting...";
         statusCam.className = "status-val connecting";
-        
+
         try {
           // Initialize MediaPipe if not loaded
           if (!hands) {
             initMediaPipe();
           }
-          
+
           const stream = await navigator.mediaDevices.getUserMedia({
             video: { width: 640, height: 480, facingMode: "user" },
             audio: false
           });
-          
+
           video.srcObject = stream;
           video.play();
-          
+
           cameraHelper = new Camera(video, {
             onFrame: async () => {
               if (webcamActive && hands) {
@@ -1598,19 +1637,19 @@
             height: 480
           });
           cameraHelper.start();
-          
+
           webcamActive = true;
           previewContainer.classList.add('active');
           statusCam.textContent = "Active";
           statusCam.className = "status-val on";
           toggleBtn.textContent = "Disable Webcam Tracking";
           toggleBtn.classList.add('active');
-          
+
         } catch (err) {
           console.error("Camera connection failed:", err);
           statusCam.textContent = "Blocked / Error";
           statusCam.className = "status-val off";
-          
+
           alert("Could not access camera feed:\n" + err.message + "\n\nEnsure camera permissions are enabled in your browser settings. The application will continue in automatic idle-loop animation mode.");
         }
       }
@@ -1621,30 +1660,30 @@
         alert("MediaPipe Hands library could not be loaded from CDN. Please check your internet connection.");
         return;
       }
-      
+
       hands = new Hands({
         locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
       });
-      
+
       hands.setOptions({
         maxNumHands: 2,
         modelComplexity: 1,
         minDetectionConfidence: 0.5,
         minTrackingConfidence: 0.5
       });
-      
+
       hands.onResults(onHandResults);
     }
 
     // --- Render Loop (requestAnimationFrame) ---
     function renderLoop() {
       requestAnimationFrame(renderLoop);
-      
+
       const time = clock.getElapsedTime();
-      
+
       // OrbitControls update
       orbitControls.update();
-      
+
       // Smooth interpolation of scale / expansion factor
       if (handsDetected) {
         // Linear interpolation towards gesture target inputs
@@ -1654,60 +1693,60 @@
         // Smooth transition back to organic breathing idle loops
         const idleScale = 1.0 + Math.sin(time * 1.6) * 0.12;
         const idleExpansion = 1.0 + Math.cos(time * 1.3) * 0.1;
-        
+
         currentScale += (idleScale - currentScale) * 0.05;
         currentExpansion += (idleExpansion - currentExpansion) * 0.05;
       }
-      
+
       // Update particles coordinate arrays
       const positions = pointsGeometry.attributes.position.array;
       const colors = pointsGeometry.attributes.color.array;
-      
+
       for (let i = 0; i < N; i++) {
         const i3 = i * 3;
         const meta = particleMeta[i];
-        
+
         // Base targets from mathematical formulas
         const tx = targetPositions[i3];
         const ty = targetPositions[i3 + 1];
         const tz = targetPositions[i3 + 2];
-        
+
         // Scale and radial expansion modifier
         let targetX = tx * currentExpansion * currentScale;
         let targetY = ty * currentExpansion * currentScale;
         let targetZ = tz * currentExpansion * currentScale;
-        
+
         // Secondary procedural fluid noise wave
         const wave = Math.sin(time * 1.8 + meta.phase) * 0.06;
         targetX += Math.sin(time + meta.noiseOffset) * wave;
         targetY += Math.cos(time * 0.8 + meta.noiseOffset) * wave;
         targetZ += Math.sin(time * 1.2 + meta.noiseOffset) * wave;
-        
+
         // Morph coordinate position buffer
         positions[i3] += (targetX - positions[i3]) * morphSpeed;
         positions[i3 + 1] += (targetY - positions[i3 + 1]) * morphSpeed;
         positions[i3 + 2] += (targetZ - positions[i3 + 2]) * morphSpeed;
-        
+
         // Morph color vectors buffer
         const tR = targetColors[i3];
         const tG = targetColors[i3 + 1];
         const tB = targetColors[i3 + 2];
-        
+
         colors[i3] += (tR - colors[i3]) * morphSpeed;
         colors[i3 + 1] += (tG - colors[i3 + 1]) * morphSpeed;
         colors[i3 + 2] += (tB - colors[i3 + 2]) * morphSpeed;
       }
-      
+
       pointsGeometry.attributes.position.needsUpdate = true;
       pointsGeometry.attributes.color.needsUpdate = true;
-      
+
       // Slow background rotational torque
       if (!handsDetected) {
         particleSystem.rotation.y += 0.0025;
       } else {
         particleSystem.rotation.y += 0.001;
       }
-      
+
       renderer.render(scene, camera);
     }
 
@@ -1716,26 +1755,26 @@
       // Color picker link
       const picker = document.getElementById('colorPicker');
       const hexSpan = document.getElementById('colorHex');
-      
+
       picker.addEventListener('input', (e) => {
         const hex = e.target.value;
         hexSpan.textContent = hex.toUpperCase();
         globalTint.set(hex);
         pointsMaterial.color.set(globalTint);
       });
-      
+
       // Sliders link
       const sizeSlider = document.getElementById('particleSize');
       sizeSlider.addEventListener('input', (e) => {
         baseParticleSize = parseFloat(e.target.value);
         pointsMaterial.size = baseParticleSize;
       });
-      
+
       const speedSlider = document.getElementById('morphRate');
       speedSlider.addEventListener('input', (e) => {
         morphSpeed = parseFloat(e.target.value);
       });
-      
+
       // Text input link
       const textInput = document.getElementById('customTextVal');
       if (textInput) {
@@ -1763,4 +1802,5 @@
 
   </script>
 </body>
+
 </html>
